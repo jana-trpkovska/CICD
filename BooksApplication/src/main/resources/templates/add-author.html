@@ -1,0 +1,28 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Add author</h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <form method="post" action="/authors/add">
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input id="firstName" name="firstName" type="text" class="form-control" th:value="(${author!=null} ? ${author.getName()} : '')" required placeholder="First name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input id="lastName" name="lastName" type="text" class="form-control" th:value="(${author!=null} ? ${author.getSurname()} : '')" required placeholder="Last name">
+          </div>
+          <input hidden name="authorId" th:value="(${author!=null} ? ${author.getId()} : '')">
+
+          <button type="submit" class="btn btn-dark ">Submit</button>
+          <a type="button" class="btn btn-primary" href="/authors">Back</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</th:block>

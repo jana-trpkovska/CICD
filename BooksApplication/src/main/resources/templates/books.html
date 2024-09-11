@@ -1,0 +1,52 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">BOOK BORROWING APP</h1>
+            <h3 class="jumbotron-heading">All books</h3>
+        </div>
+    </section>
+
+    <div>
+        <a class="btn btn-dark m-3" href="/books/add-book">Add new book</a>
+    </div>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12 " th:if="${books.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Book title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Available copies</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="book : ${books}">
+                            <td th:text="${book.getName()}"></td>
+                            <td th:text="${book.getCategory()}"></td>
+                            <td th:text="${book.getAuthor().getName()+' '+book.getAuthor().getSurname()}"></td>
+                            <td th:text="${book.getAvailableCopies()}"></td>
+                            <td>
+                                <a th:href="@{'/books/edit-book/{id}' (id=${book.getId()}) }" class="btn btn-info">Edit</a>
+                            </td>
+                            <td>
+                                <a th:href="@{'/books/delete-book/{id}' (id=${book.getId()}) }" class="btn btn-danger">Delete</a>
+                            </td>
+                            <td sec:authorize="isAuthenticated()">
+                                <a th:href="@{'/books/add-to-cart/{bookId}' (bookId=${book.getId()})}" class="btn btn-warning">Borrow book</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

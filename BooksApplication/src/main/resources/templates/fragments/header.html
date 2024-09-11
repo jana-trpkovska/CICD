@@ -1,0 +1,46 @@
+<header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/books">BOOK BORROWING APP</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item m-auto">
+            <a class="nav-link active" href="/authors">Authors</a>
+          </li>
+          <li class="nav-item m-auto">
+            <a class="nav-link active" href="/books">Books</a>
+          </li>
+          <th:block sec:authorize="isAuthenticated()">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" th:href="@{'/cart'}">Cart</a>
+            </li>
+          </th:block>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <th:block sec:authorize="isAuthenticated()">
+            <li class="nav-item text-white">
+              Hello <span sec:authentication="principal.username"></span>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-light btn-sm ml-3" href="/logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="!isAuthenticated()">
+            <li class="nav-item">
+              <a class="btn btn-light btn-sm ml-3" href="/login">
+                <i class="fa-solid fa-right-to-bracket"></i> Login
+              </a>
+            </li>
+          </th:block>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
